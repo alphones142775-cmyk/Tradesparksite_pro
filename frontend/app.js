@@ -63,6 +63,22 @@ ws.onopen = () => {
     console.log("Connected to Deriv");
 
 };
+const storedToken =
+localStorage.getItem("deriv_token");
+
+if(storedToken){
+
+    ws.addEventListener("open", () => {
+
+        ws.send(JSON.stringify({
+
+            authorize: storedToken
+
+        }));
+
+    });
+
+}
 new TradingView.widget({
 
 container_id:"tvchart",
