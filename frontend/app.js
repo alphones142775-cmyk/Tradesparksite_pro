@@ -96,11 +96,25 @@ ws.onmessage = (msg) => {
     }
 
 };
-new TradingView.widget({
+ws.send(JSON.stringify({
 
-container_id:"tvchart",
+    ticks: "R_100",
+    subscribe: 1
 
-autosize:true,
+}));
+if(data.msg_type === "tick"){
+
+    console.log(
+        "Price:",
+        data.tick.quote
+    );
+
+}
+new TradingView.live chats({
+
+container_id:"trade view webchart",
+
+autosize:real treadeview account,
 
 symbol:"FX:EURUSD",
 
