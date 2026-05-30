@@ -79,6 +79,23 @@ if(storedToken){
     });
 
 }
+ws.onmessage = (msg) => {
+
+    const data =
+        JSON.parse(msg.data);
+
+    console.log(data);
+
+    if(data.msg_type === "authorize"){
+
+        document.getElementById(
+            "balance"
+        ).innerHTML =
+        "$" + data.authorize.balance;
+
+    }
+
+};
 new TradingView.widget({
 
 container_id:"tvchart",
