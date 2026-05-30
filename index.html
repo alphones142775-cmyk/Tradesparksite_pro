@@ -1,1 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>Tradesparksite.Pro</title>
 
+<link rel="stylesheet" href="style.css">
+
+<script src="https://s3.tradingview.com/tv.js"></script>
+</head>
+<body>
+
+<div id="loader">
+    <div class="logo">TRADESPARKSITE.PRO</div>
+    <div class="loading-bar">
+        <span></span>
+    </div>
+</div>
+
+<div id="app">
+
+<header>
+
+<div class="brand">
+    TradeSparkSite<span>.Pro</span>
+</div>
+
+<nav>
+
+<a href="#">🏠 Dashboard</a>
+<a href="#">🤖 Free Bots</a>
+<a href="#">📉 Strategies</a>
+<a href="#">📑 Analysis</a>
+<a href="#">🪙 D-Trader</a>
+<a href="#">📶 Signals</a>
+<a href="#">📊 Chats</a>
+<a href="#">💾 Copy Trading</a>
+<a href="#">🛜 Forex</a>
+
+</nav>
+
+<div class="account">
+
+<button id="loginBtn">
+Login with Deriv
+</button>
+
+</div>
+
+</header>
+
+<div class="container">
+
+<aside class="sidebar">
+
+<div class="profile-card">
+
+<img src="https://i.pravatar.cc/150">
+
+<h3 id="username">Trader</h3>
+
+<p>USD REAL</p>
+
+<h2 id="balance">$0.00</h2>
+
+</div>
+
+<div class="menu">
+
+<button>Deposit</button>
+<button>Withdraw</button>
+<button>Transfer</button>
+
+</div>
+
+</aside>
+
+<main>
+
+<section class="markets">
+
+<div class="market">Volatility 75</div>
+<div class="market">Volatility 100</div>
+<div class="market">Boom 500</div>
+<div class="market">Crash 500</div>
+<div class="market">Forex</div>
+
+</section>
+
+<section class="chart">
+
+<div id="tvchart"></div>
+
+</section>
+
+<section class="bottom-grid">
+
+<div class="card">
+<h3>Signals</h3>
+<ul>
+<li>VOL75 CALL</li>
+<li>BOOM500 PUT</li>
+<li>CRASH500 CALL</li>
+</ul>
+</div>
+
+<div class="card">
+<h3>Copy Trading</h3>
+<p>Minimum $100 balance.</p>
+</div>
+
+<div class="card">
+<h3>Forex Markets</h3>
+<p>EUR/USD</p>
+<p>GBP/USD</p>
+<p>USD/JPY</p>
+</div>
+
+</section>
+
+</main>
+
+<aside class="trade-panel">
+
+<h3>Manual Trade</h3>
+
+<input placeholder="Stake">
+
+<select>
+<option>1 Tick</option>
+<option>5 Ticks</option>
+<option>10 Ticks</option>
+</select>
+
+<button class="call">
+CALL
+</button>
+
+<button class="put">
+PUT
+</button>
+
+</aside>
+
+</div>
+
+</div>
+
+<script src="app.js"></script>
+
+</body>
+</html>
