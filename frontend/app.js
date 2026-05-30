@@ -54,7 +54,15 @@ alert(
 );
 
 });
+const ws = new WebSocket(
+    "wss://ws.derivws.com/websockets/v3?app_id=33p7PVqGTbhzPMv1GNtXr"
+);
 
+ws.onopen = () => {
+
+    console.log("Connected to Deriv");
+
+};
 new TradingView.widget({
 
 container_id:"tvchart",
