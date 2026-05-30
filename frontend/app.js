@@ -19,7 +19,20 @@ now.toLocaleTimeString();
 
 },1000);
 
-document.getElementById("loginBtn")
+document.getElementById("const APP_ID = "33p7PVqGTbhzPMv1GNtXr";
+const REDIRECT_URL =
+"https://alphones142775-cmyk.github.io/Trading-platform/";
+
+document
+.getElementById("loginBtn")
+.addEventListener("click", () => {
+
+    const authUrl =
+        `https://oauth.deriv.com/oauth2/authorize?app_id=${APP_ID}&l=EN`;
+
+    window.location.href = authUrl;
+
+});")
 .addEventListener("click",()=>{
 
 alert(
