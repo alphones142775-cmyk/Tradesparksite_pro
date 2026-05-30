@@ -30,7 +30,21 @@ document
     const authUrl =
         `https://oauth.deriv.com/oauth2/authorize?app_id=${APP_ID}&l=EN`;
 
-    window.location.href = authUrl;
+    window.location.href = authUrl;function getQueryParam(name) {
+    const params = new URLSearchParams(window.location.search);
+    return params.get(name);
+}
+
+const token = getQueryParam("token");
+
+if(token){
+
+    localStorage.setItem(
+        "deriv_token",
+        token
+    );
+
+}
 
 });")
 .addEventListener("click",()=>{
