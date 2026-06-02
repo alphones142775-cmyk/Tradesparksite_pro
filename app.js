@@ -3,6 +3,26 @@
 // ======================================
 
 // APP CONFIG
+// 1. Generate a random code_verifier
+const array = crypto.getRandomValues(new Uint8Array(64));
+const codeVerifier = Array.from(array)
+  .map(v => 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789-._~'[v % 66])
+  .join('');
+
+// 2. Derive the code_challenge
+const hash = await crypto.subtle.digest('SHA-256', new TextEncoder().encode(codeVerifier));
+const codeChallenge = btoa(String.fromCharCode(...new Uint8Array(hash)))
+  .replace(/\+/g, '-')
+  .replace(/\//g, '_')
+  .replace(/=+$/, '');
+
+// 3. Generate a random state for CSRF protection
+const state = crypto.getRandomValues(new Uint8Array(16))
+  .reduce((s, b) => s + b.toString(16).padStart(2, '0'), '');
+
+// 4. Store code_verifier and state before redirecting
+sessionStorage.setItem('pkce_code_verifier', codeVerifier);
+sessionStorage.setItem('oauth_state', state);
 
 const APP_ID = "33p7PVqGTbhzPMv1GNtXr";
 
@@ -20,7 +40,7 @@ const otpResponse = await fetch(
     }
   }
 );
-
+https://auth.deriv.com/oauth2/auth
 const otpResult = await otpResponse.json();
 const wsUrl = otpResult.data.url;
 console.log('Authenticated WebSocket URL:', wsUrl);
@@ -37,8 +57,28 @@ window.addEventListener("load", () => {
         document.getElementById("app").style.display = "block";
 
     }, 3000);
-
+https://auth.deriv.com/oauth2/auth?
+  response_type=code
+  &client_id={YOUR_CLIENT_ID}          # e.g. app12345
+  &redirect_uri={YOUR_REDIRECT_URI}    # e.g. https://yourapp.com/callback
+  &scope=trade+account_manage
+  &state={RANDOM_STATE}                # e.g. abc123random
+  &code_challenge={PKCE_CHALLENGE}     # e.g. E9Melhoa2OwvFrEMTJguCHaoeK1t8URWbuGJSstw-cM
+  &code_challenge_method=S256
 });
+https://auth.deriv.com/oauth2/auth?
+  response_type=code
+  &client_id={YOUR_CLIENT_ID}          # e.g. app12345
+  &redirect_uri={YOUR_REDIRECT_URI}    # e.g. https://yourapp.com/callback
+  &scope=trade+account_manage
+  &state={RANDOM_STATE}                # e.g. abc123random
+  &code_challenge={PKCE_CHALLENGE}     # e.g. E9Melhoa2OwvFrEMTJguCHaoeK1t8URWbuGJSstw-cM
+  &code_challenge_method=S256
+  &prompt=registration
+  &t={YOUR_TRACKING_TOKEN}             # or: affiliate_token | sidi | ca — use the name from your referral link
+  &utm_campaign={YOUR_CAMPAIGN}        # e.g. dynamicworks
+  &utm_medium=affiliate
+  &utm_source={YOUR_AFFILIATE_ID}      # e.g. CU303219
 // Connect to Options WebSocket using the authenticated URL from OTP response
 // The URL already contains the correct endpoint (demo/real) and authentication
 const ws = new WebSocket(wsUrl);
